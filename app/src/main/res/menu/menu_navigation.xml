@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_modo"
+        android:title="Modo Oscuro/Claro" />
+    <item
+        android:id="@+id/menu_acerca_de"
+        android:title="Acerca de" />
+</menu>

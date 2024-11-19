@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RuletaApp</string>
+    <string name="btn_juego">Juego</string>
+    <string name="btn_reservas">Reservas</string>
+    <string name="dialog_acerca_de">Acerca de</string>
+    <string name="modo_claro">Claro</string>
+    <string name="modo_oscuro">Oscuro</string>
+</resources>

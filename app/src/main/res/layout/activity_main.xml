@@ -1,0 +1,76 @@
+<!-- activity_main.xml -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="#F8F9FA">
+
+        <!-- App Icon -->
+        <ImageView
+            android:id="@+id/appIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ruletaappicon"
+            android:layout_marginTop="50dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RuletaTetas"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_below="@id/appIcon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/btnJuego"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Juego"
+            android:backgroundTint="#FF0000"
+            android:textColor="#FFFFFF"
+            android:layout_below="@id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp" />
+
+        <Button
+            android:id="@+id/btnReservas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reservas"
+            android:backgroundTint="#00FF00"
+            android:textColor="#FFFFFF"
+            android:layout_below="@id/btnJuego"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnOpciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opciones"
+            android:backgroundTint="#000000"
+            android:textColor="#FFFFFF"
+            android:layout_below="@id/btnReservas"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu_navigation" />
+</androidx.drawerlayout.widget.DrawerLayout>
