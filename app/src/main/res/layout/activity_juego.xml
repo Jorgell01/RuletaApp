@@ -1,497 +1,129 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#006400">
+    android:background="@color/green">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Marcador del número ganador -->
+    <TextView
+        android:id="@+id/labelWinningNumber"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Fichas iniciales -->
+    <TextView
+        android:id="@+id/labelInitialChips"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:text="Fichas iniciales: 1000"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/labelWinningNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+    <!-- Fichas apostadas -->
+    <TextView
+        android:id="@+id/labelBetChips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fichas apostadas: 0"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/labelInitialChips"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp" />
 
-            <!-- Sección izquierda (Ruleta y botón Girar) -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="16dp"
-                android:gravity="center">
+    <!-- Imagen de la ruleta -->
+    <ImageView
+        android:id="@+id/rouletteWheel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ruleta"
+        android:contentDescription="Ruleta"
+        app:layout_constraintTop_toBottomOf="@id/labelBetChips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/spinnerColors"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_margin="16dp" />
 
-                <!-- Ruleta -->
-                <ImageView
-                    android:id="@+id/rouletteWheel"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/roulette_wheel" />
+    <!-- Indicador en forma de flecha -->
+    <ImageView
+        android:id="@+id/triangleIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/flecha"
+        android:contentDescription="Indicador de flecha"
+        app:layout_constraintTop_toTopOf="@id/rouletteWheel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-                <!-- Botón Girar -->
-                <Button
-                    android:id="@+id/btnSpin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Girar"
-                    android:backgroundTint="#FF9800"
-                    android:textColor="#FFFFFF" />
+    <!-- Selector de colores (Color Bet) -->
+    <Spinner
+        android:id="@+id/spinnerColors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/rouletteWheel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:padding="8dp" />
 
-                <!-- Resultado -->
-                <TextView
-                    android:id="@+id/txtResult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Resultado"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginTop="16dp" />
+    <!-- Selector de números (Number Bet) -->
+    <Spinner
+        android:id="@+id/spinnerNumbers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/spinnerColors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
 
-                <!-- Contador de fichas -->
-                <TextView
-                    android:id="@+id/chipCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
+    <!-- Campo para ingresar la cantidad de apuesta -->
+    <EditText
+        android:id="@+id/editTextBetAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:hint="Cantidad de apuesta"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/spinnerNumbers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
 
-            <!-- Sección central (Tablero de apuestas) -->
-            <GridLayout
-                android:id="@+id/bettingTable"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:columnCount="8"
-                android:alignmentMode="alignMargins"
-                android:padding="4dp"
-                android:background="#FFFFFF">
+    <!-- Botón para girar la ruleta -->
+    <Button
+        android:id="@+id/btnSpin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Girar la ruleta"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/editTextBetAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
 
-                <!-- Botones de apuestas -->
-                <Button
-                    android:id="@+id/btn_0"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:layout_columnSpan="2"
-                    android:backgroundTint="#4CAF50"
-                    android:text="0"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_1"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="1"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_2"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="2"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_3"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="3"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_4"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="4"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_5"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="5"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_6"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="6"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_7"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="7"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_8"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="8"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_9"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="9"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_10"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="10"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_11"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="11"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_12"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="12"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_13"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="13"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_14"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="14"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_15"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="15"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_16"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="16"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_17"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="17"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_18"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="18"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_19"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="19"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_20"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="20"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_21"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="21"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_22"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="22"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_23"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="23"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_24"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="24"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_25"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="25"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_26"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="26"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_27"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="27"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_28"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="28"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_29"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="29"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_30"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="30"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_31"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="31"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_32"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="32"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_33"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="33"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_34"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="34"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_35"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="35"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_36"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#000000"
-                    android:text="36"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_even"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#4CAF50"
-                    android:text="Even"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/btn_odd"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="4dp"
-                    android:backgroundTint="#4CAF50"
-                    android:text="Odd"
-                    android:textColor="#FFFFFF" />
-            </GridLayout>
-
-            <!-- Sección derecha (Saldo, Apuesta actual, y Confirmar) -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/txtBalance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SALDO: 100"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txtCurrentBet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="APUESTA ACTUAL: 0"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp" />
-
-                <Button
-                    android:id="@+id/btnConfirmBet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Confirmar Apuesta"
-                    android:backgroundTint="#FF9800"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Sección inferior (Fichas para seleccionar) -->
-        <LinearLayout
-            android:id="@+id/chipOptions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
-
-            <ImageView
-                android:id="@+id/chip1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ficha_1"
-                android:layout_margin="4dp" />
-
-            <ImageView
-                android:id="@+id/chip5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ficha_5" />
-
-            <ImageView
-                android:id="@+id/chip10"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ficha_10" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

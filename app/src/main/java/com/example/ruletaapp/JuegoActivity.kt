@@ -2,125 +2,165 @@ package com.example.ruletaapp
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.animation.DecelerateInterpolator
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.math.floor
-import kotlin.random.Random
+import kotlin.math.roundToInt
 
 class JuegoActivity : AppCompatActivity() {
-    private val wheelSections = (0..36).map { it.toString() }
-    private var totalChips = 100
-    private var currentBet = 0
-    private var selectedOption: String? = null
+
+    private lateinit var triangleIndicator: ImageView
+    private lateinit var rouletteWheel: ImageView
+    private lateinit var btnSpin: Button
+    private lateinit var spinnerNumbers: Spinner
+    private lateinit var spinnerColors: Spinner
+    private lateinit var editTextBetAmount: EditText
+    private lateinit var labelInitialChips: TextView
+    private lateinit var labelBetChips: TextView
+
+    private var initialChips = 1000
+    private var betChips = 0
+    private val numbers = (0..36).toList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
 
-        val rouletteWheel = findViewById<ImageView>(R.id.rouletteWheel)
-        val btnSpin = findViewById<Button>(R.id.btnSpin)
-        val txtResult = findViewById<TextView>(R.id.txtResult)
-        val chipCount = findViewById<TextView>(R.id.chipCount)
+        // Enlazar vistas
+        triangleIndicator = findViewById(R.id.triangleIndicator)
+        rouletteWheel = findViewById(R.id.rouletteWheel)
+        btnSpin = findViewById(R.id.btnSpin)
+        spinnerNumbers = findViewById(R.id.spinnerNumbers)
+        spinnerColors = findViewById(R.id.spinnerColors)
+        editTextBetAmount = findViewById(R.id.editTextBetAmount)
+        labelInitialChips = findViewById(R.id.labelInitialChips)
+        labelBetChips = findViewById(R.id.labelBetChips)
 
-        chipCount.text = totalChips.toString()
+        setupSpinners()
 
         btnSpin.setOnClickListener {
-            if (currentBet == 0 || selectedOption == null) {
-                Toast.makeText(this, "Por favor, realiza una apuesta.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (validateBet()) {
+                calculateMoneyStake()
+                spinRoulette()
+            } else {
+                Toast.makeText(this, "Por favor, completa tu apuesta correctamente", Toast.LENGTH_SHORT).show()
             }
-
-            val randomAngle = Random.nextInt(360, 1440)
-            val sectionAngle = 360f / wheelSections.size
-
-            // Animación de la ruleta
-            val animator = ObjectAnimator.ofFloat(rouletteWheel, "rotation", 0f, randomAngle.toFloat())
-            animator.duration = 3000
-            animator.start()
-
-            animator.addListener(object : android.animation.Animator.AnimatorListener {
-                override fun onAnimationStart(animation: android.animation.Animator) {}
-
-                override fun onAnimationEnd(animation: android.animation.Animator) {
-                    // Calcular el ángulo final relativo
-                    val finalAngle = randomAngle % 360
-                    val sectionIndex = floor(finalAngle / sectionAngle).toInt()
-
-                    // El número ganador
-                    val result = wheelSections[(36 - sectionIndex) % 37] // Invertimos la dirección del giro
-
-                    txtResult.text = "¡El número ganador es: $result!"
-
-                    // Comprobar si la apuesta es ganadora
-                    if (selectedOption == result) {
-                        totalChips += currentBet * 2
-                        Toast.makeText(this@JuegoActivity, "¡Ganaste!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        totalChips -= currentBet
-                        Toast.makeText(this@JuegoActivity, "¡Perdiste!", Toast.LENGTH_SHORT).show()
-                    }
-                    chipCount.text = totalChips.toString()
-                }
-
-                override fun onAnimationCancel(animation: android.animation.Animator) {}
-                override fun onAnimationRepeat(animation: android.animation.Animator) {}
-            })
         }
-
-        configureBettingButtons()
     }
 
-    private fun configureBettingButtons() {
-        val bettingButtons = listOf(
-            findViewById<Button>(R.id.btn_1),
-            findViewById<Button>(R.id.btn_2),
-            findViewById<Button>(R.id.btn_3),
-            findViewById<Button>(R.id.btn_4),
-            findViewById<Button>(R.id.btn_5),
-            findViewById<Button>(R.id.btn_6),
-            findViewById<Button>(R.id.btn_7),
-            findViewById<Button>(R.id.btn_8),
-            findViewById<Button>(R.id.btn_9),
-            findViewById<Button>(R.id.btn_10),
-            findViewById<Button>(R.id.btn_11),
-            findViewById<Button>(R.id.btn_12),
-            findViewById<Button>(R.id.btn_13),
-            findViewById<Button>(R.id.btn_14),
-            findViewById<Button>(R.id.btn_15),
-            findViewById<Button>(R.id.btn_16),
-            findViewById<Button>(R.id.btn_17),
-            findViewById<Button>(R.id.btn_18),
-            findViewById<Button>(R.id.btn_19),
-            findViewById<Button>(R.id.btn_20),
-            findViewById<Button>(R.id.btn_21),
-            findViewById<Button>(R.id.btn_22),
-            findViewById<Button>(R.id.btn_23),
-            findViewById<Button>(R.id.btn_24),
-            findViewById<Button>(R.id.btn_25),
-            findViewById<Button>(R.id.btn_26),
-            findViewById<Button>(R.id.btn_27),
-            findViewById<Button>(R.id.btn_28),
-            findViewById<Button>(R.id.btn_29),
-            findViewById<Button>(R.id.btn_30),
-            findViewById<Button>(R.id.btn_31),
-            findViewById<Button>(R.id.btn_32),
-            findViewById<Button>(R.id.btn_33),
-            findViewById<Button>(R.id.btn_34),
-            findViewById<Button>(R.id.btn_35),
-            findViewById<Button>(R.id.btn_36),
-            findViewById<Button>(R.id.btn_even),
-            findViewById<Button>(R.id.btn_odd)
-        )
+    private fun setupSpinners() {
+        val numbers = (0..36).map { it.toString() }
+        val colors = listOf("Rojo", "Negro", "Verde")
 
-        for (button in bettingButtons) {
-            button.setOnClickListener {
-                selectedOption = button.text.toString()
-                currentBet = 10
-                Toast.makeText(this, "Apostaste por $selectedOption", Toast.LENGTH_SHORT).show()
+        spinnerNumbers.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, numbers)
+        spinnerColors.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colors)
+    }
+
+    private fun validateBet(): Boolean {
+        val betAmount = editTextBetAmount.text.toString().toIntOrNull() ?: 0
+        return betAmount > 0 && spinnerNumbers.selectedItem != null && spinnerColors.selectedItem != null
+    }
+
+    private fun calculateMoneyStake() {
+        val betAmount = editTextBetAmount.text.toString().toIntOrNull() ?: 0
+        if (betAmount > initialChips) {
+            Toast.makeText(this, "No tienes suficientes fichas para esta apuesta", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        initialChips -= betAmount
+        betChips += betAmount
+        updateLabels()
+    }
+
+    private fun spinRoulette() {
+        val rotation = (720..1440).random().toFloat() // Rotación aleatoria con al menos dos giros completos
+        val animator = ObjectAnimator.ofFloat(rouletteWheel, "rotation", rouletteWheel.rotation, rouletteWheel.rotation + rotation)
+        animator.duration = 3000
+        animator.interpolator = DecelerateInterpolator()
+        animator.start()
+
+        animator.addListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationStart(animation: android.animation.Animator) {}
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                determineResult(rouletteWheel.rotation)
+            }
+            override fun onAnimationCancel(animation: android.animation.Animator) {}
+            override fun onAnimationRepeat(animation: android.animation.Animator) {}
+        })
+    }
+
+    private fun determineResult(rotation: Float) {
+        val normalizedRotation = (rotation % 360 + 360) % 360 // Normaliza el ángulo a [0, 360)
+        val anglePerNumber = 360f / numbers.size
+
+        // Determina el índice del número ganador basado en la posición final de la ruleta
+        val winningIndex = ((normalizedRotation + anglePerNumber / 2) / anglePerNumber).toInt() % numbers.size
+        val winningNumber = numbers[winningIndex]
+
+        val winningColor = when {
+            winningNumber == 0 -> "Verde"
+            winningNumber % 2 == 0 -> "Negro"
+            else -> "Rojo"
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Número Ganador")
+            .setMessage("El número ganador es: $winningNumber")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                calculateWinnings(winningNumber, winningColor)
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun calculateWinnings(winningNumber: Int, winningColor: String) {
+        val betAmount = editTextBetAmount.text.toString().toIntOrNull() ?: 0
+        var winnings = 0
+
+        // Calcular ganancias por número
+        if (spinnerNumbers.selectedItem.toString() == winningNumber.toString()) {
+            winnings += betAmount * 5
+        }
+
+        // Calcular ganancias por color
+        if (spinnerColors.selectedItem.toString() == winningColor) {
+            winnings += when (winningColor) {
+                "Verde" -> betAmount * 14
+                else -> betAmount * 2
             }
         }
+
+        // Actualizar fichas
+        initialChips += winnings
+        betChips = 0
+        updateLabels()
+
+        if (initialChips == 0) {
+            showGameOverDialog()
+        }
+    }
+
+    private fun updateLabels() {
+        labelInitialChips.text = "Fichas iniciales: $initialChips"
+        labelBetChips.text = "Fichas apostadas: $betChips"
+    }
+
+    private fun showGameOverDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Juego Terminado")
+            .setMessage("Te has quedado sin fichas. ¿Quieres reiniciar el juego o volver al menú principal?")
+            .setPositiveButton("Reiniciar") { _, _ -> resetGame() }
+            .setNegativeButton("Menú Principal") { _, _ -> finish() }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun resetGame() {
+        initialChips = 1000
+        betChips = 0
+        updateLabels()
     }
 }

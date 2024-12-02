@@ -17,6 +17,15 @@ object DialogosHelper {
             .show()
     }
 
+    fun mostrarDialogoAyuda(context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle("Ayuda")
+            .setMessage("Esta es una breve explicación de cómo navegar por la app y sus funciones.")
+            .setPositiveButton("Cerrar") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
+    }
+
     fun mostrarDialogoAcercaDe(context: Context) {
         AlertDialog.Builder(context)
             .setTitle("Acerca de")
