@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green">
+    android:background="?attr/colorBackground">
 
     <!-- Marcador del número ganador -->
     <TextView
@@ -13,7 +12,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:text="0"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fichas iniciales: 1000"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/labelWinningNumber"
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fichas apostadas: 0"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/labelInitialChips"
@@ -66,8 +65,8 @@
     <!-- Indicador en forma de flecha -->
     <ImageView
         android:id="@+id/triangleIndicator"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@drawable/flecha"
         android:contentDescription="Indicador de flecha"
         app:layout_constraintTop_toTopOf="@id/rouletteWheel"
@@ -79,7 +78,7 @@
         android:id="@+id/spinnerColors"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="?attr/colorSurface"
         app:layout_constraintTop_toBottomOf="@id/rouletteWheel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +90,7 @@
         android:id="@+id/spinnerNumbers"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="?attr/colorSurface"
         app:layout_constraintTop_toBottomOf="@id/spinnerColors"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +102,7 @@
         android:id="@+id/editTextBetAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="?attr/colorSurface"
         android:hint="Cantidad de apuesta"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/spinnerNumbers"
@@ -118,8 +117,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Girar la ruleta"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/editTextBetAmount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -92,11 +92,17 @@ class JuegoActivity : AppCompatActivity() {
     }
 
     private fun determineResult(rotation: Float) {
-        val normalizedRotation = (rotation % 360 + 360) % 360 // Normaliza el ángulo a [0, 360)
-        val anglePerNumber = 360f / numbers.size
+        val normalizedRotation = (rotation % 360 + 360) % 360 // Normaliza a [0, 360)
+        val anglePerNumber = 360f / 37 // Cada número ocupa 9.73°
 
-        // Determina el índice del número ganador basado en la posición final de la ruleta
-        val winningIndex = ((normalizedRotation + anglePerNumber / 2) / anglePerNumber).toInt() % numbers.size
+        // Offset inicial (ajustar según el número inicial visible donde apunta el triángulo)
+        val startingOffset = 0f // Cambiar si el número inicial no es 0
+
+        // Ajustar rotación con el offset inicial
+        val adjustedRotation = (normalizedRotation + startingOffset) % 360
+
+        // Calcular el índice del número ganador
+        val winningIndex = ((adjustedRotation + anglePerNumber / 2) / anglePerNumber).toInt() % numbers.size
         val winningNumber = numbers[winningIndex]
 
         val winningColor = when {
@@ -105,9 +111,10 @@ class JuegoActivity : AppCompatActivity() {
             else -> "Rojo"
         }
 
+        // Mostrar el número ganador
         AlertDialog.Builder(this)
             .setTitle("Número Ganador")
-            .setMessage("El número ganador es: $winningNumber")
+            .setMessage("El número ganador es: $winningNumber ($winningColor)")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
                 calculateWinnings(winningNumber, winningColor)
@@ -115,6 +122,8 @@ class JuegoActivity : AppCompatActivity() {
             .setCancelable(false)
             .show()
     }
+
+
 
     private fun calculateWinnings(winningNumber: Int, winningColor: String) {
         val betAmount = editTextBetAmount.text.toString().toIntOrNull() ?: 0

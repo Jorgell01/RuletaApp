@@ -12,31 +12,36 @@
         android:theme="@style/Theme.RuletaApp"
         tools:targetApi="31">
 
-        <!-- Actividad principal -->
+        <!-- SplashActivity -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.RuletaApp" />
+
         <!-- JuegoActivity -->
         <activity
             android:name=".JuegoActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.RuletaApp" />
 
         <!-- ReservasActivity -->
         <activity
             android:name=".ReservasActivity"
-            android:exported="true" />
-
-        <!-- SplashActivity -->
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.RuletaApp" />
     </application>
 
 </manifest>

@@ -5,4 +5,6 @@
     <string name="dialog_acerca_de">Acerca de</string>
     <string name="modo_claro">Claro</string>
     <string name="modo_oscuro">Oscuro</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

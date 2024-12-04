@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#00FF00</color> <!-- Verde -->
-    <color name="red">#FF0000</color>   <!-- Rojo -->
-    <color name="white">#FFFFFF</color> <!-- Blanco -->
+    <!-- Light Theme Colors -->
+    <color name="primaryLight">#6200EE</color>
+    <color name="onPrimaryLight">#FFFFFF</color>
+    <color name="backgroundLight">#FFFFFF</color>
+    <color name="onBackgroundLight">#000000</color>
+    <color name="surfaceLight">#FFFFFF</color>
+    <color name="onSurfaceLight">#000000</color>
+
+    <!-- Dark Theme Colors -->
+    <color name="primaryDark">#BB86FC</color>
+    <color name="onPrimaryDark">#000000</color>
+    <color name="backgroundDark">#121212</color>
+    <color name="onBackgroundDark">#FFFFFF</color>
+    <color name="surfaceDark">#121212</color>
+    <color name="onSurfaceDark">#FFFFFF</color>
+
+    <!-- Additional Colors -->
+    <color name="green">#00FF00</color>
+    <color name="white">#FFFFFF</color>
 </resources>
