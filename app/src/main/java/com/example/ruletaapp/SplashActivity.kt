@@ -11,10 +11,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // Esperar 3 segundos y luego iniciar MainActivity
+        // Espera 3 segundos y luego inicia MainActivity
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            finish() // Finaliza SplashActivity para que no se pueda volver a ella
         }, 3000) // 3000 milisegundos = 3 segundos
     }
 }

@@ -19,11 +19,13 @@ class JuegoActivity : AppCompatActivity() {
         diceImage = findViewById(R.id.diceImage)
         rollButton = findViewById(R.id.rollButton)
 
+        // Configura el botón para lanzar el dado
         rollButton.setOnClickListener {
             rollDice()
         }
     }
 
+    // Lanza el dado y muestra el resultado
     private fun rollDice() {
         val result = Random.nextInt(1, 7)
         val drawableResource = when (result) {
@@ -38,6 +40,7 @@ class JuegoActivity : AppCompatActivity() {
         showResultDialog(result)
     }
 
+    // Muestra un diálogo con el resultado del lanzamiento del dado
     private fun showResultDialog(result: Int) {
         val message = when (result) {
             1 -> "¿Un uno? Colega, eres un pringado en todos los aspectos de tu vida."

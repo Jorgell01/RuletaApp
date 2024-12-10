@@ -38,6 +38,7 @@ class ReservasActivity : AppCompatActivity() {
             showDatePicker { date -> binding.edtFechaNacimiento.setText(date) }
         }
 
+        // Agregar una nueva cita a la lista
         binding.btnAgregarCita.setOnClickListener {
             val nuevaCita = Cita(
                 nombre = binding.edtNombre.text.toString(),
@@ -47,10 +48,11 @@ class ReservasActivity : AppCompatActivity() {
                 fechaNacimiento = binding.edtFechaNacimiento.text.toString()
             )
             citas.add(nuevaCita)
-            adapter.notifyDataSetChanged()
+            adapter.notifyDataSetChanged() // Notifica al adaptador que los datos han cambiado
         }
     }
 
+    // Muestra un TimePicker para seleccionar la hora
     private fun showTimePicker() {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -62,6 +64,7 @@ class ReservasActivity : AppCompatActivity() {
         }, hour, minute, true).show()
     }
 
+    // Muestra un DatePicker para seleccionar la fecha
     private fun showDatePicker(onDateSelected: ((String) -> Unit)? = null) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
