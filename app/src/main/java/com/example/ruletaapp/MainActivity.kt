@@ -2,6 +2,8 @@ package com.example.ruletaapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,6 +14,7 @@ import com.example.ruletaapp.helpers.DialogosHelper
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var ratingBar: RatingBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnReservas.setOnClickListener {
             startActivity(Intent(this, ReservasActivity::class.java))
+        }
+
+        binding.btnTroyano.setOnClickListener {
+            val intent = Intent(this, VideoActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Configurar RatingBar
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            Toast.makeText(this, "Puntuación: $rating", Toast.LENGTH_SHORT).show()
         }
 
         // Configurar Navigation Drawer

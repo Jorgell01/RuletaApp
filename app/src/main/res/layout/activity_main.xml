@@ -24,9 +24,9 @@
         <!-- App Icon -->
         <ImageView
             android:id="@+id/appIcon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ruletaappicon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/isaac_d6"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RuletaApp"
+            android:text="Roll or Die"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnBackground"
@@ -70,6 +70,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnTroyano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Troyano"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintTop_toBottomOf="@id/btnReservas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- RatingBar para puntuar la app -->
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:numStars="5"
+            android:stepSize="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnReservas" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

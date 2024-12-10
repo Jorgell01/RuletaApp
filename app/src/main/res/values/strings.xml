@@ -1,5 +1,6 @@
+<!-- res/values/strings.xml -->
 <resources>
-    <string name="app_name">RuletaApp</string>
+    <string name="app_name">Roll or Die</string>
     <string name="btn_juego">Juego</string>
     <string name="btn_reservas">Reservas</string>
     <string name="dialog_acerca_de">Acerca de</string>
@@ -7,4 +8,6 @@
     <string name="modo_oscuro">Oscuro</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="dice_image">Dice Image</string>
+    <string name="roll">Roll</string>
 </resources>

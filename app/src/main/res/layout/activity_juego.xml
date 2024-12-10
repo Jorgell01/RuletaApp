@@ -1,128 +1,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground">
+    tools:context=".JuegoActivity">
 
-    <!-- Marcador del número ganador -->
-    <TextView
-        android:id="@+id/labelWinningNumber"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="?attr/colorOnBackground"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/diceImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:contentDescription="@string/dice_image"
+        android:src="@drawable/dice_1" />
 
-    <!-- Fichas iniciales -->
-    <TextView
-        android:id="@+id/labelInitialChips"
+    <Button
+        android:id="@+id/rollButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fichas iniciales: 1000"
-        android:textColor="?attr/colorOnBackground"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/labelWinningNumber"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp" />
-
-    <!-- Fichas apostadas -->
-    <TextView
-        android:id="@+id/labelBetChips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fichas apostadas: 0"
-        android:textColor="?attr/colorOnBackground"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/labelInitialChips"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp" />
-
-    <!-- Imagen de la ruleta -->
-    <ImageView
-        android:id="@+id/rouletteWheel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ruleta"
-        android:contentDescription="Ruleta"
-        app:layout_constraintTop_toBottomOf="@id/labelBetChips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/spinnerColors"
-        app:layout_constraintDimensionRatio="1"
-        android:layout_margin="16dp" />
-
-    <!-- Indicador en forma de flecha -->
-    <ImageView
-        android:id="@+id/triangleIndicator"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@drawable/flecha"
-        android:contentDescription="Indicador de flecha"
-        app:layout_constraintTop_toTopOf="@id/rouletteWheel"
+        android:layout_marginTop="16dp"
+        android:text="@string/roll"
+        app:layout_constraintTop_toBottomOf="@id/diceImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Selector de colores (Color Bet) -->
-    <Spinner
-        android:id="@+id/spinnerColors"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
-        app:layout_constraintTop_toBottomOf="@id/rouletteWheel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="8dp" />
-
-    <!-- Selector de números (Number Bet) -->
-    <Spinner
-        android:id="@+id/spinnerNumbers"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
-        app:layout_constraintTop_toBottomOf="@id/spinnerColors"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:padding="8dp" />
-
-    <!-- Campo para ingresar la cantidad de apuesta -->
-    <EditText
-        android:id="@+id/editTextBetAmount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
-        android:hint="Cantidad de apuesta"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/spinnerNumbers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:padding="8dp" />
-
-    <!-- Botón para girar la ruleta -->
-    <Button
-        android:id="@+id/btnSpin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Girar la ruleta"
-        android:backgroundTint="?attr/colorPrimary"
-        android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintTop_toBottomOf="@id/editTextBetAmount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="12dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

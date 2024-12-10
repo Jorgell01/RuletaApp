@@ -6,6 +6,7 @@
     <color name="onBackgroundLight">#000000</color>
     <color name="surfaceLight">#FFFFFF</color>
     <color name="onSurfaceLight">#000000</color>
+    <color name="textColorLight">#000000</color>
 
     <!-- Dark Theme Colors -->
     <color name="primaryDark">#BB86FC</color>
@@ -14,6 +15,7 @@
     <color name="onBackgroundDark">#FFFFFF</color>
     <color name="surfaceDark">#121212</color>
     <color name="onSurfaceDark">#FFFFFF</color>
+    <color name="textColorDark">#FFFFFF</color>
 
     <!-- Additional Colors -->
     <color name="green">#00FF00</color>

@@ -31,7 +31,7 @@ object DialogosHelper {
     fun mostrarDialogoAcercaDe(context: Context) {
         AlertDialog.Builder(context)
             .setTitle(context.getString(R.string.dialog_acerca_de))
-            .setMessage("RuletaApp\nVersión 1.0\nDesarrollado por Jorge")
+            .setMessage("Roll or Die\nVersión 1.0\nDesarrollado por Jorge A. Herrero Santana")
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .create()
             .show()

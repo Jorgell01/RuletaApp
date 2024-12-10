@@ -7,6 +7,7 @@
         <item name="colorOnBackground">@color/onBackgroundLight</item>
         <item name="colorSurface">@color/surfaceLight</item>
         <item name="colorOnSurface">@color/onSurfaceLight</item>
-        <!-- Add more theme attributes as needed -->
+        <item name="android:textColor">@color/textColorLight</item>
+
     </style>
 </resources>
